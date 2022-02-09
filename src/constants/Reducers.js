@@ -1,14 +1,16 @@
 const Reducers = {
     addDigit: (state, digit) => {
-        if (digit === "0" && state.currentOperand === "0")
+        const currentOperand = state.currentOperand ?? "";
+        
+        if (digit === "0" && currentOperand === "0")
             return state;
-        if (digit === "." && state.currentOperand.includes("."))
+        if (digit === ".") {
+            if (!currentOperand || currentOperand.includes("."))
             return state;
+        }
 
         if (state.overwrite)
             return { ...state, currentOperand: digit, overwrite: false };
-
-        const currentOperand = state.currentOperand ?? "";
 
         return { ...state, currentOperand: currentOperand + digit };
     },
