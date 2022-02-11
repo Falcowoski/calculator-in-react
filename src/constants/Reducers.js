@@ -4,11 +4,10 @@ const Reducers = {
         
         if (digit === "0" && currentOperand === "0")
             return state;
-        if (digit === ".") {
-            if (!currentOperand || currentOperand.includes("."))
+    
+        if (digit === "." && currentOperand.includes(".")) 
             return state;
-        }
-
+        
         if (state.overwrite)
             return { ...state, currentOperand: digit, overwrite: false };
 
